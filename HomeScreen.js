@@ -276,8 +276,9 @@ export default function HomeScreen() {
 
                                     resizeMode={"contain"}
                                     style={{
-                                        width: screenWidth, height: screenWidth,
-                                        marginTop: 20, opacity: 0.6, transform: [{ scale: 1.5 }], borderRadius: 900
+                                        backgroundColor: "transparent",
+                                        width: screenWidth, height: screenWidth / 2,
+                                        marginTop: 100, opacity: wheat==="wheat"? 0.6:0.5, transform: [{ scale: 1.5 }], borderRadius: 900
                                     }}
                                 />
                             </View>
