@@ -211,7 +211,7 @@ export default function ContextProvider(props) {
             setSouceWordArr(arr)
             setTimeout(() => {
                 saveWordToFile()
-            }, 100);
+            }, 500);  // used to be 100
 
             totalWordsNum.value = arr.length
         }
