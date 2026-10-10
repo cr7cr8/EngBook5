@@ -2,7 +2,7 @@
   "expo": {
     "name": "EngBook5",
     "slug": "EngBook5",
-    "version": "3.8.1",
+    "version": "4.11.11",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "dark",

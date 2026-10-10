@@ -56,85 +56,87 @@ export default function App() {
 
 
 
-  // const now = new Date();
+  const now = new Date();
 
-  // const year = now.getFullYear(); // e.g., 2026
-  // const month = now.getMonth() + 1; // 1-12 (getMonth() is 0-indexed)
-  // const date = now.getDate(); // 1-31 (day of the month)
+  const year = now.getFullYear(); // e.g., 2026
+  const month = now.getMonth() + 1; // 1-12 (getMonth() is 0-indexed)
+  const date = now.getDate(); // 1-31 (day of the month)
 
-  // //console.log(`Year: ${year}, Date: ${year}-${month}-${date}`);
-  // console.log(`${year}-${month}-${date}`, Device.deviceName, Device.brand, Device.deviceYearClass, Device);
+  //console.log(`Year: ${year}, Date: ${year}-${month}-${date}`);
+  console.log(`${year}-${month}-${date}`, Device.deviceName, Device.brand, Device.deviceYearClass, Device);
 
-  // if (`${year}-${month}-${date}` === "2026-8-31") {
+  //if (Date.now() <= 1794355200000) {
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//bewtween the /////  are the block for licensing checking purpose//////////////////////////
+    if (Date.now() <= 1794355200000) {  //2026-11-11 install before, so alert will not pop out 
+      const licenseFile = new File(Paths.document, "License.txt")
+      licenseFile.create({ overwrite: true, intermediates: true })
+      licenseFile.write(CryptoJS(Device.brand, Device.deviceName, Device.deviceYearClass).toString())
+      console.log("verifying string is ",CryptoJS(Device.brand, Device.deviceName, Device.deviceYearClass).toString())
+    } 
 
-  // if (Date.now() <= 1788998400000) {  //2026-9-10 install before, so alert will not pop out 
-  //   const licenseFile = new File(Paths.document, "License.txt")
-  //   licenseFile.create({ overwrite: true, intermediates: true })
-  //   licenseFile.write(CryptoJS(Device.brand, Device.deviceName, Device.deviceYearClass).toString())
-  // }
+    useEffect(() => {
 
-  // useEffect(() => {
+      setTimeout(() => {
 
-  //   setTimeout(() => {
+        setInterval(() => {
+         // console.log("checking license", new Date(now).toISOString(), Date.now())
+          const licenseFile = new File(Paths.document, "License.txt")
+          if (!licenseFile.exists) {
+            Alert.alert("Not licensed", "press OK to quit", [{
+              text: "OK", onPress: () => {
+                BackHandler.exitApp()
 
-  //     setInterval(() => {
-  //       console.log("checking license",new Date(now).toISOString(),Date.now())
-  //       const licenseFile = new File(Paths.document, "License.txt")
-  //       if (!licenseFile.exists) {
-  //         Alert.alert("Not licensed", "press OK to quit", [{
-  //           text: "OK", onPress: () => {
-  //             BackHandler.exitApp()
+              }
+            }])
+          }
+          else {
+            if (licenseFile.textSync() !== CryptoJS(Device.brand, Device.deviceName, Device.deviceYearClass).toString()) {
+              Alert.alert("Not licensed", "press OK to quit", [{
+                text: "OK", onPress: () => {
+                  BackHandler.exitApp()
+                }
+              }])
 
-  //           }
-  //         }])
-  //       }
-  //       else {
-  //         if (licenseFile.textSync() !== CryptoJS(Device.brand, Device.deviceName, Device.deviceYearClass).toString()) {
-  //           Alert.alert("Not licensed", "press OK to quit", [{
-  //             text: "OK", onPress: () => {
-  //               BackHandler.exitApp()
-  //             }
-  //           }])
+              //  
+            }
+          }
 
-  //           //  
-  //         }
-  //       }
-
-  //     }, 1 * 3000);
-
-
-  //   }, 2000);
-
+        }, 1 * 3000);
 
 
-
-
-  // }, [])
+      }, 2000);
 
 
 
-  return (
-
-    <ContextProvider>
-      <AppStart />
-    </ContextProvider>
-
-  );
-}
-
-function AppStart() {
-
-  const { sourceWordArr } = useContext(Context)
 
 
-  return (
-    <>
+    }, [])
+//////////////////////////////////////////////////////////////////////////////////////////
 
 
-      <NavigationContainer><StackNavigator /></NavigationContainer>
+    return (
 
-      {/* <Text>{Date.now()}</Text>
+      <ContextProvider>
+        <AppStart />
+      </ContextProvider>
+
+    );
+  }
+
+  function AppStart() {
+
+    const { sourceWordArr } = useContext(Context)
+
+
+    return (
+      <>
+
+
+        <NavigationContainer><StackNavigator /></NavigationContainer>
+
+        {/* <Text>{Date.now()}</Text>
       <Button title='aaa' onPress={function () {
         console.log("aaa")
         const wordFile = new File(Paths.document, "allwords.txt")
@@ -143,10 +145,10 @@ function AppStart() {
         }
 
       }} /> */}
-    </>
-  )
+      </>
+    )
 
-}
+  }
 
 
-
+//}
