@@ -65,56 +65,56 @@ export default function App() {
   //console.log(`Year: ${year}, Date: ${year}-${month}-${date}`);
   console.log(`${year}-${month}-${date}`, Device.deviceName, Device.brand, Device.deviceYearClass, Device);
 
-  //if (Date.now() <= 1794355200000) {
+ 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //bewtween the /////  are the block for licensing checking purpose//////////////////////////
-    if (Date.now() <= 1794355200000) {  //2026-11-11 install before, so alert will not pop out 
-      const licenseFile = new File(Paths.document, "License.txt")
-      licenseFile.create({ overwrite: true, intermediates: true })
-      licenseFile.write(CryptoJS(Device.brand, Device.deviceName, Device.deviceYearClass).toString())
-      console.log("verifying string is ",CryptoJS(Device.brand, Device.deviceName, Device.deviceYearClass).toString())
-    } 
+    // if (Date.now() <= 1794355200000) {  //2026-11-11 install before, so alert will not pop out 
+    //   const licenseFile = new File(Paths.document, "License.txt")
+    //   licenseFile.create({ overwrite: true, intermediates: true })
+    //   licenseFile.write(CryptoJS(Device.brand, Device.deviceName, Device.deviceYearClass).toString())
+    //   console.log("verifying string is ",CryptoJS(Device.brand, Device.deviceName, Device.deviceYearClass).toString())
+    // } 
 
-    useEffect(() => {
+    // useEffect(() => {
 
-      setTimeout(() => {
+    //   setTimeout(() => {
 
-        setInterval(() => {
-         // console.log("checking license", new Date(now).toISOString(), Date.now())
-          const licenseFile = new File(Paths.document, "License.txt")
-          if (!licenseFile.exists) {
-            Alert.alert("Not licensed", "press OK to quit", [{
-              text: "OK", onPress: () => {
-                BackHandler.exitApp()
+    //     setInterval(() => {
+    //      // console.log("checking license", new Date(now).toISOString(), Date.now())
+    //       const licenseFile = new File(Paths.document, "License.txt")
+    //       if (!licenseFile.exists) {
+    //         Alert.alert("Not licensed", "press OK to quit", [{
+    //           text: "OK", onPress: () => {
+    //             BackHandler.exitApp()
 
-              }
-            }])
-          }
-          else {
-            if (licenseFile.textSync() !== CryptoJS(Device.brand, Device.deviceName, Device.deviceYearClass).toString()) {
-              Alert.alert("Not licensed", "press OK to quit", [{
-                text: "OK", onPress: () => {
-                  BackHandler.exitApp()
-                }
-              }])
+    //           }
+    //         }])
+    //       }
+    //       else {
+    //         if (licenseFile.textSync() !== CryptoJS(Device.brand, Device.deviceName, Device.deviceYearClass).toString()) {
+    //           Alert.alert("Not licensed", "press OK to quit", [{
+    //             text: "OK", onPress: () => {
+    //               BackHandler.exitApp()
+    //             }
+    //           }])
 
-              //  
-            }
-          }
+    //           //  
+    //         }
+    //       }
 
-        }, 1 * 3000);
-
-
-      }, 2000);
+    //     }, 1 * 3000);
 
 
+    //   }, 2000);
 
 
 
-    }, [])
+
+
+    // }, [])
 //////////////////////////////////////////////////////////////////////////////////////////
-
+/////////////////////////////////////////////////////////////////////////////////////////
 
     return (
 

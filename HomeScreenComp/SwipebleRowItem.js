@@ -259,29 +259,31 @@ function LeftAction({ progress, drag, panel, sourceWord, index, visiblePanel, ..
 
         console.log(isNewerstOnTop.value, ",,,dd,")
 
-        setSouceWordArr(arr => {
-            const arr_ = arr.map((item) => {
-                if (item.wordName !== sourceWord.wordName) {
-                    return item
+  
+            setSouceWordArr(arr => {
+                const arr_ = arr.map((item) => {
+                    if (item.wordName !== sourceWord.wordName) {
+                        return item
+                    }
+                    else {
+                        return { ...item, toppingTime: Date.now() }
+                    }
+                })
+
+                if (isNewerstOnTop.value) {
+                    arr_.sort((word1, word2) => { return word2.toppingTime - word1.toppingTime })
                 }
                 else {
-                    return { ...item, toppingTime: Date.now() }
+                    arr_.sort((word1, word2) => { return word1.toppingTime - word2.toppingTime })
                 }
+
+              
+                return [...arr_]
             })
+     
 
-            if (isNewerstOnTop.value) {
-                arr_.sort((word1, word2) => { return word2.toppingTime - word1.toppingTime })
-            }
-            else {
-                arr_.sort((word1, word2) => { return word1.toppingTime - word2.toppingTime })
-            }
-
-
-            return [...arr_]
-        })
-        setRefreshState(Math.random())
+       setRefreshState(Math.random())
         setTimeout(() => {
-
             saveWordToFile()
         }, 0);
     }
