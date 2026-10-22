@@ -563,7 +563,6 @@ function WordPanel({ sourceWord, index, visibleCard }) {
 
 
 
-
                     }),
                 Gesture.Tap()
                     .numberOfTaps(1)
