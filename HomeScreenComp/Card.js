@@ -540,18 +540,18 @@ function WordPanel({ sourceWord, index, visibleCard }) {
                     .numberOfTaps(2)
                     .onEnd(e => {
 
-                        if (e.x <= 100) {
-                            if (!isListPlaying.value) {
-                                isListPlaying.value = true
-                                runOnJS(autoPlay)();
-                                return
-                            }
-                            else {
-                                runOnJS(delayStopSpeak)()
-                                return
-                            }
-                        }
-                        else {
+                        // if (e.x <= 100) {
+                        //     if (!isListPlaying.value) {
+                        //         isListPlaying.value = true
+                        //         runOnJS(autoPlay)();
+                        //         return
+                        //     }
+                        //     else {
+                        //         runOnJS(delayStopSpeak)()
+                        //         return
+                        //     }
+                        // }
+                        //else {
                             if (e.y <= englishHeight.value) {
 
                                 runOnJS(goToSentenceSettingScreen)(true)
@@ -559,7 +559,9 @@ function WordPanel({ sourceWord, index, visibleCard }) {
                             else {
                                 runOnJS(goToSentenceSettingScreen)()
                             }
-                        }
+                        //}
+
+
 
 
                     }),

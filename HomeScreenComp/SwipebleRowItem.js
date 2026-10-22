@@ -259,30 +259,30 @@ function LeftAction({ progress, drag, panel, sourceWord, index, visiblePanel, ..
 
         console.log(isNewerstOnTop.value, ",,,dd,")
 
-  
-            setSouceWordArr(arr => {
-                const arr_ = arr.map((item) => {
-                    if (item.wordName !== sourceWord.wordName) {
-                        return item
-                    }
-                    else {
-                        return { ...item, toppingTime: Date.now() }
-                    }
-                })
 
-                if (isNewerstOnTop.value) {
-                    arr_.sort((word1, word2) => { return word2.toppingTime - word1.toppingTime })
+        setSouceWordArr(arr => {
+            const arr_ = arr.map((item) => {
+                if (item.wordName !== sourceWord.wordName) {
+                    return item
                 }
                 else {
-                    arr_.sort((word1, word2) => { return word1.toppingTime - word2.toppingTime })
+                    return { ...item, toppingTime: Date.now() }
                 }
-
-              
-                return [...arr_]
             })
-     
 
-       setRefreshState(Math.random())
+            if (isNewerstOnTop.value) {
+                arr_.sort((word1, word2) => { return word2.toppingTime - word1.toppingTime })
+            }
+            else {
+                arr_.sort((word1, word2) => { return word1.toppingTime - word2.toppingTime })
+            }
+
+
+            return [...arr_]
+        })
+
+
+        setRefreshState(Math.random())
         setTimeout(() => {
             saveWordToFile()
         }, 0);
@@ -500,32 +500,32 @@ export function PanelItem({ sourceWord, index, visiblePanel, panelRef, ...props 
         })
         .onEnd(e => {
 
-            if (e.absoluteX <= 100) {
+            // if (e.absoluteX <= 100) {
 
-                if (!isListPlaying.value) {
-                    isListPlaying.value = true
-                    scheduleOnRN(autoPlay);
-                    const y = Math.min(screenHeight - (headHeight + 80), Math.max(160, screenHeight - e.absoluteY - (- e.y)))
-
-
-                    if (frameTransY.value === 0) {
-                        frameTransY.value = withTiming(y, { duration: 200 }, function () {
-                            if (Math.abs(frameTransY.value - (screenHeight - (headHeight + 80))) < 20) {
-                                frameTransY.value = screenHeight - headHeight - 80
-                            }
-
-                        })
-                    }
+            //     if (!isListPlaying.value) {
+            //         isListPlaying.value = true
+            //         scheduleOnRN(autoPlay);   //-------------------------->>>  do not play the list when double click
+            //         const y = Math.min(screenHeight - (headHeight + 80), Math.max(160, screenHeight - e.absoluteY - (- e.y)))
 
 
-                    return
-                }
-                else {
-                    //frameTransY.value = withTiming(0, { duration: 200 })
-                    scheduleOnRN(delayStopSpeak)
-                    return
-                }
-            }
+            //         if (frameTransY.value === 0) {
+            //             frameTransY.value = withTiming(y, { duration: 200 }, function () {
+            //                 if (Math.abs(frameTransY.value - (screenHeight - (headHeight + 80))) < 20) {
+            //                     frameTransY.value = screenHeight - headHeight - 80
+            //                 }
+
+            //             })
+            //         }
+
+
+            //         return
+            //     }
+            //     else {
+            //         //frameTransY.value = withTiming(0, { duration: 200 })
+            //         scheduleOnRN(delayStopSpeak)
+            //         return
+            //     }
+            // }
 
 
 
